@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.haneul.nanobackend.auth.MetaGraphClient
 import com.haneul.nanobackend.encription.TokenEncryptor
 import com.haneul.nanobackend.repository.SocialAuthRepository
+import org.springframework.http.MediaType
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -89,4 +90,40 @@ class ReviewMetaApiController(
     // helper for JsonNode iteration
     private fun JsonNode.firstOrNull(): JsonNode? =
         if (this.isArray && this.size() > 0) this[0] else null
+}
+
+@RestController
+class MetaNeedController(){
+    @GetMapping("/privacy", produces = [MediaType.TEXT_HTML_VALUE])
+    fun privacy(): String = """
+        <h1>Privacy Policy</h1>
+        <p>This application ("nano2") collects Facebook and Instagram account data only with explicit user consent.</p>
+        
+        <h2>Collected Data</h2>
+        <ul>
+          <li>Facebook user ID</li>
+          <li>Encrypted access tokens</li>
+          <li>Facebook Pages and connected Instagram Business account information</li>
+        </ul>
+        
+        <h2>Purpose</h2>
+        <p>Data is used solely for influencer analysis and collaboration eligibility evaluation.</p>
+        
+        <h2>Data Storage</h2>
+        <p>All access tokens are encrypted at rest. Data is never sold or shared.</p>
+        
+        <h2>Data Deletion</h2>
+        <p>Users may request deletion at any time via the Data Deletion Request endpoint.</p>
+        
+        <h2>Contact</h2>
+        <p>Email: support@nano2.example</p>
+        """
+    @GetMapping("/data-deletion", produces = [MediaType.TEXT_HTML_VALUE])
+    fun dataDeletion(): String = """
+        <h1>Data Deletion Request</h1>
+        <p>If you wish to delete your data associated with nano2, please contact:</p>
+        <p><strong>Email:</strong> support@nano2.example</p>
+        <p>Your request will be processed within 7 days.</p>
+        """
+
 }
