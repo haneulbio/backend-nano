@@ -1,4 +1,4 @@
-package com.haneul.nanobackend.cofig
+package com.haneul.nanobackend.config
 
 import com.haneul.nanobackend.auth.OAuthSuccessHandler
 import org.springframework.context.annotation.Bean
@@ -13,9 +13,16 @@ class SecurityConfig(
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http
-            .csrf { it.disable() } // enable properly if you use browser sessions/forms
+            .csrf { it.disable() }
             .authorizeHttpRequests {
-                it.requestMatchers("/", "/health", "/oauth2/**", "/login/**").permitAll()
+                it.requestMatchers(
+                    "/", "/health",
+                    "/oauth2/**", "/login/**",
+                    "/review", "/review/**",
+                    "/connected"
+                ).permitAll()
+
+                it.requestMatchers("/api/**").authenticated()
                 it.anyRequest().authenticated()
             }
             .oauth2Login { oauth ->
