@@ -19,7 +19,8 @@ class SecurityConfig(
                     "/", "/health",
                     "/oauth2/**", "/login/**",
                     "/review", "/review/**",
-                    "/connected"
+                    "/privacy",
+                    "/data-deletion"
                 ).permitAll()
 
                 it.requestMatchers("/api/**").authenticated()
