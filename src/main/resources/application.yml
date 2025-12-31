@@ -1,0 +1,58 @@
+spring:
+  application:
+    name: nanobackend
+
+  datasource:
+    url: "jdbc:postgresql://aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres?sslmode=require"
+    username: "postgres.kgufmgdavnorilwapfcz"
+    password: ${POSTGRES_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  security:
+    oauth2:
+      client:
+        registration:
+          meta:
+            client-id: ${META_APP_ID}
+            client-secret: ${META_APP_SECRET}
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope:
+               - public_profile
+#               - instagram_basic
+#               - pages_show_list
+#               - pages_read_engagement
+              # 나중에 필요하면
+              # - instagram_manage_insights
+        provider:
+          meta:
+            authorization-uri: https://www.facebook.com/v24.0/dialog/oauth
+            token-uri: https://graph.facebook.com/v24.0/oauth/access_token
+            user-info-uri: https://graph.facebook.com/me?fields=id,name
+            user-name-attribute: id
+
+
+quotes:
+  search:
+    ignore-case: true
+    min-length: 3
+  validation:
+    min-content-length: 5
+    max-content-length: 500
+    require-author: true
+    allowed-categories:
+      - "motivational"
+      - "funny"
+      - "tech"
+      - "wisdom"
+
+server:
+  port: 8080
+
+app:
+  token-encryption:
+    password: ${TOKEN_ENC_PASSWORD:dev-only-change-me}
+    salt-hex: ${TOKEN_ENC_SALT_HEX:0123456789abcdef}
