@@ -58,8 +58,21 @@ quotes:
 server:
   port: 8080
   forward-headers-strategy: framework
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-exception: true
 
 app:
   token-encryption:
     password: ${TOKEN_ENC_PASSWORD:dev-only-change-me}
     salt-hex: ${TOKEN_ENC_SALT_HEX:0123456789abcdef}
+
+openai:
+  api-key: ${OPENAI_API_KEY}
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.springframework.http.converter.json: DEBUG
+    org.springframework.security: DEBUG

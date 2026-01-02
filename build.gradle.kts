@@ -29,6 +29,10 @@ dependencies {
     implementation("org.springframework.security:spring-security-crypto")
     implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
 
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation("com.openhtmltopdf:openhtmltopdf-pdfbox:1.0.10")
+    implementation("com.openhtmltopdf:openhtmltopdf-slf4j:1.0.10")
+
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")

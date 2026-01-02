@@ -16,11 +16,13 @@ class SecurityConfig(
             .csrf { it.disable() }
             .authorizeHttpRequests {
                 it.requestMatchers(
-                    "/", "/health",
+                    "/", "/health", "/health/**",
+                    "/error",
                     "/oauth2/**", "/login/**",
                     "/review", "/review/**",
                     "/privacy",
-                    "/data-deletion"
+                    "/data-deletion",
+                    "/demo/**"
                 ).permitAll()
 
                 it.requestMatchers("/api/**").authenticated()
