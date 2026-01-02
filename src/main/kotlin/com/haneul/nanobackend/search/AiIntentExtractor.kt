@@ -63,7 +63,6 @@ class OpenAiIntentExtractor(
             .retrieve()
             .body(String::class.java) ?: error("Empty OpenAI response")
 
-        // Responses API returns content in an output array; easiest robust approach is parse and find first JSON text chunk
         val tree = om.readTree(raw)
         val jsonText = tree
             .path("output").firstOrNull()
